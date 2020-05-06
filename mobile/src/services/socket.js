@@ -1,8 +1,8 @@
 import socketio from 'socket.io-client'
 
-const socket = socketio('', {
+const socket = socketio('http://192.168.0.1:3333', {
     autoConnect: false
-}) //Mesmo endereço do api.js
+})
 
 function subscribeToNewDevs(subcribeFunction) {
     socket.on('new-dev', subcribeFunction)

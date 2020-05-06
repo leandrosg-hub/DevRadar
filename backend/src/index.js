@@ -11,10 +11,10 @@ const server = http.Server(app)
 
 setupWebsocket(server)
 
-mongoose.connect('', {
+mongoose.connect('mongodb+srv://leandrosg:hHHhY2eBoubREMvs@cluster0-5vtil.mongodb.net/devradar?retryWrites=true&w=majority', {
     useNewUrlParser: true,
     useUnifiedTopology: true
-}) //pegar o link de conexão do banco de dados no mongoDB (assistir backend após 39min)
+})
 
 app.use(cors())
 app.use(express.json())
