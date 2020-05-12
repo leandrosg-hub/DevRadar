@@ -1,12 +1,11 @@
 import React, { useState, useEffect } from 'react'
 import { StyleSheet, Image, View, Text, TextInput, TouchableOpacity } from 'react-native'
 import MapView, { Marker, Callout } from 'react-native-maps'
-import { requestPermissionAsync, getCurrentPositionAsync} from 'expo-location'
+import { requestPermissionsAsync, getCurrentPositionAsync} from 'expo-location'
 import { MaterialIcons } from '@expo/vector-icons'
 
 import api from '../services/api'
 import { connect, disconnect, subscribeToNewDevs } from '../services/socket'
-import { setupWebsocket } from '../../../backend/src/websocket'
 
 function Main({ navigation }) {
     const [devs, setDevs] = useState([])
@@ -14,8 +13,8 @@ function Main({ navigation }) {
     const [techs, setTechs] = useState('')
 
     useEffect(() => {
-        async function loadInitialPosition(){
-            const { granted } = await requestPermissionAsync()
+        async function loadInitialPosition() {
+            const { granted } = await requestPermissionsAsync()
 
             if(granted) {
                 const { coords } = await getCurrentPositionAsync({
@@ -80,9 +79,11 @@ function Main({ navigation }) {
         <>
             <MapView onRegionChangeComplete={handleRegionChange} initialRegion={currentRegion} style={styles.map}>
                 {devs.map(dev => (
-                    <Marker coordinate={{ 
-                        latitude: dev.location.coordinates[1], 
-                        longitude: dev.location.coordinates[0]
+                    <Marker
+                        key={dev._id}
+                        coordinate={{ 
+                            latitude: dev.location.coordinates[1], 
+                            longitude: dev.location.coordinates[0]
                     }}>
                     <Image style={styles.avatar} 
                         source={{ uri: dev.avatar_url }}

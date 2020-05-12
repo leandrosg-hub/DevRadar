@@ -4,7 +4,7 @@ import api from './services/api'
 import './global.css';
 import './App.css';
 import './Sidebar.css';
-import '.Main.css';
+import './Main.css';
 
 import DevForm from './components/DevForm'
 import DevItem from './components/DevItem'
@@ -38,7 +38,7 @@ function App() {
       <main>
         <ul>
           {devs.map(dev => (
-            <DevItem dev = {dev._id} dev={dev} />
+            <DevItem key={dev._id} dev={dev} />
           ))}
         </ul>
       </main>
